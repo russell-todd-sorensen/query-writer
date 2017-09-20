@@ -1,0 +1,113 @@
+# data model ideas for query processor control
+#
+
+#objects
+#---------
+# object_id      (unique string)
+# object         (actual object name, or table name could be same as object_id) 
+# table          (object table, if blank, use object for updates?) 
+# keys           (key attr or attrs like product_id)
+# to_eval        (list of vars to set and what to eval to set the var)
+# perm_checks    (what integers to check for permissions need perm 
+#                 so maybe something like 'product_id write')
+# ops            (operations permitted, usually new, del)
+#object_attrs
+#------------
+# object_id       (from objects table)
+# attr_id         (unique string p_id, but may be same as attr)
+# attr            (actual attr name i.e. product_id)       
+# filters         (integer notnull trim)
+# allowed_values  (1 2 3 or t f etc.)
+# length          (an integer)
+ 
+#qp_groups
+#-----------
+# group_id         (could reference any acs_object.object_id like 1, must be positive)
+# name             (human language name for group like admin)
+
+#group_attr_map
+#----------------
+# group_id         (from qp_groups)
+# object_id        (from objects)
+# attr_id          (from object_attrs)
+# allowed_values   (subset from object_attrs)
+# ops              (subset from object_attrs)
+
+# data in these table will be used to set a number of arrays
+# Need arrays for:
+# ops -> object_id.group_id ops checked once per object.
+# attr_values -> object_id.group_id.attr_id.allowed_value, for each allowed value or
+# attrs -> object_id.group_id.attr_id for an attribute with all values allowed
+# filters -> object_id.attr_id for a list of filters
+# lengths -> object_id.attr_id for an integer length or null for no length check
+# to_eval -> object_id for a list of things to eval
+# perm_checks -> object_id for a list of things to check permission on
+# id_to_object -> object_id for the object name
+# id_to_attr -> attr_id for the attr name.
+# id_to_table -> object_id for update table.
+# id_to_keys -> object_id to primary keys.
+#
+# test data:
+
+#objects table data
+#object_id  name    table       keys       to_eval perm_checks ops
+#product    product dp_products product_id ""      product_id  "new set del"
+
+#object_attrs table data
+#object_id  attr_id   attr   filters   allowed_values  length
+#product    name      name   trim      ""              100
+#product    desc      descr  trim      ""              ""
+#product    cat       cat    integer   "1 2 3 4 5"     ""
+
+#group_attr_map
+#group_id   object_id attr_id    allowed_values  ops
+#1          product   ""         ""              "new set del"
+#1          product   name       ""              ""
+#1          product   desc       ""              ""
+#1          product   cat        ""              ""
+#5          product   ""         ""              "new set"
+#5          product   name       ""              ""
+#5          product   desc       ""              ""
+#5          product   cat        "3 4"           ""
+
+# this configuration allows admins (group 1) to create and delete
+# product objects as well as assigning any value of cat that is allowed
+# But users in the group 5 cannot delete the product object and can
+# only assign cat values of 3 and 4.
+ 
+# Here are the arrays that must be setup:
+
+set ops.1.new(product) 1
+set ops.1.set(product) 1
+set ops.1.del(product) 1
+set ops.5.new(product) 1
+set ops.5.set(product) 1
+
+
+set attr_values.5(product.cat.3) 1
+set attr_values.5(product.cat.4) 1
+
+set attrs.1(product.cat) 1
+set attrs.5(product.name) 1
+
+set filters(product.cat) "integer"
+set filters(product.name) "trim" ;# check the lengths array for length
+ 
+set lengths(product.name) 100
+
+set to_eval(product) [list]
+lappend to_eval(product) "context_id" {[get_user_id]}
+
+set perm_checks(product) [list]
+lappend perm_checks(product) {$product_id}
+
+set id_to_object(product) product
+
+set id_to_attr(product.name) name
+set id_to_attr(product.desc) descr
+set id_to_attr(product.cat)  cat
+
+set id_to_table(product) dp_products
+
+
+

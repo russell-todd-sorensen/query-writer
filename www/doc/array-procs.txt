@@ -1,0 +1,64 @@
+set new(product.name.0) "productone"
+set new(product.long_description.0) "This is product one"
+set new(product.mfg_id.0) "231"
+set new(stock.supplier_id.0) "12234"
+set new(stock.description.0) "This is stock item 1"
+set new(stock.supplier_code.0) "ST34579N"
+
+set new_names [array names new]
+
+# Go through the new objects
+# new objects have the form object_name.attr.id 
+# The object name plus the object id forms a unique key
+# of the form object_name.id  
+# To keep track of the object and their type an array
+# objectarray is used. Keys of the objectarray are the object_name.id
+# and the value is the object_name
+# The attributes of the object_name.id are organized into a new
+# array called 'array.object_name.id'
+# the keys of this array are the attributes.
+#
+
+
+
+
+foreach name $new_names {
+
+    set name_list [split $name "."]
+    set o [lindex $name_list 0]
+    set a [lindex $name_list 1]
+    set p ${o}.[lindex $name_list 2]
+    set array.${p}(${a}) $new($name)
+    set objectarray($p) $o
+
+}
+
+# once the new arrays are created each one
+# is processed 
+
+# I would like to be able to use this with any pg function.
+# There are some attributes whose value cannot be passed
+# in via a web form. These include:
+# context_id
+# user_id
+# owner_id
+#
+# probably each object needs a set of strings like
+# "set owner_id $user_id" "set context_id $customer_id
+# or as a list:
+# owner_id $user_id context_id $customer_id
+# then process like:
+# eval "set [lindex $l 0] [lindex $l 1]"
+# this offers the advantage of even indexes being the
+# name of attributes to add to the dml/function.
+
+foreach p [array names objectarray] {
+
+    puts $p
+    set p_attr_names [array names array.${p}]
+    foreach attr $p_attr_names {
+        puts "  $attr = [set array.${p}($attr)]"
+    }
+}
+
+puts "the end"

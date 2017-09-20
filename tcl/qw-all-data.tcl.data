@@ -1,0 +1,1514 @@
+catch {db_dml insert_group "insert into qw_groups (group_id, name) values (
+'1','QW Admin')" } 
+catch {db_dml insert_group "insert into qw_groups (group_id, name) values (
+'2','Main Site Members')" } 
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('qw_object','qw_object','qw_objects','object_id',
+'','','','new;set;del','','','','',
+'0')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'object','qw_object','object',
+'The Data Model Object Name.','',
+'Name of the object used in dml or pl.','',
+'','100','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'table','qw_object','obj_table',
+'Object Table Name.','',
+'The name of the table where objects are stored.','',
+'','30','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'key','qw_object','key',
+'The object key attribute','',
+'Primary key attribute of the object.','',
+'','150','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'ops','qw_object','ops',
+'Operations permitted','',
+'Semi-colon separated list of permitted operations, such as: ''new;del;set;rst''','',
+'','100','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'newfn','qw_object','new_fn',
+'New Function Name','',
+'Name of the function which creates new objects.','',
+'','40','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'setfn','qw_object','set_fn',
+'Set Function Name','',
+'Name of function that updates object attribute values.','',
+'','40','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'delfn','qw_object','del_fn',
+'Delete Function Name','',
+'Name of function which deletes objects.','',
+'','40','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'rstfn','qw_object','rst_fn',
+'Reset Function Name','',
+'Name of function that sets object attribute values to the default value.','',
+'','40','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'permp','qw_object','perm_p',
+'Permission Check','1',
+'Flag to specify permission checking via permission_p.','integer',
+'1;0','1','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'setperms','qw_object','set_perm_check',
+'Update Permission Checks','',
+'Additional permission checks during updates.','',
+'','256','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'delperms','qw_object','del_perm_check',
+'Delete Permission Checks','',
+'Extra permission checks on object delete.','',
+'','256','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'id','qw_object','object_id',
+'Form variable object ID.','',
+'The object part of a form variable name.','',
+'','100','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'eval','qw_object','to_eval',
+'Statements to eval after all variables set.','',
+'Attribute Name;eval statement pairs, separated by semi-colon.','',
+'','0','text')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('qw_attr','qw_attr','qw_attrs','attr_id;object_id',
+'','','','new','','','','',
+'0')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'attr','qw_attr','attr',
+'Attribute','',
+'Name of the attribute used in dml and pl.','',
+'','100','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'description','qw_attr','description',
+'Description','',
+'The description of the attribute.','',
+'','100','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'default','qw_attr','default_value',
+'Default Value','',
+'The default value of the attribute to be used if no value is given, or for resetting the attribute.','',
+'','100','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'values','qw_attr','values',
+'Values','',
+'A semi-colon separated set of possible values for the attribute. This is useful in the case of a limited number of values where some values cannot be accessed by all groups.','',
+'','1000','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'id','qw_attr','attr_id',
+'Form variable attribute ID','',
+'The attribute part of the form variable name.','',
+'','100','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'objectid','qw_attr','object_id',
+'Object ID','',
+'ID of object this attribute belongs to.','',
+'','100','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'length','qw_attr','length',
+'Max Attribute Length','',
+'The maximum attribute length for char and varchar data types. A length filter will be run if the length is greater than zero.','integer',
+'','0','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'help','qw_attr','help_text',
+'Help Text','',
+'Text that would help a user fill out a form correctly or to explain the meaning of an attribute.','',
+'','0','text')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'datatype','qw_attr','datatype',
+'datatype','''varchar''',
+'','',
+'','100','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'attr_table','qw_attr','attr_table',
+'attribute table','',
+'','',
+'','64','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'filters','qw_attr','filters',
+'Attribute filters','',
+'','',
+'','1000','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'attr_order','qw_attr','attr_order',
+'Attribute order','',
+'','integer',
+'','0','integer')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('qw_group','qw_group','qw_groups','group_id',
+'','','','new;set;del','','','','',
+'0')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'name','qw_group','name',
+'Group Name','',
+'The name of the group.','',
+'','100','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'id','qw_group','group_id',
+'Group ID','',
+'A small integer identifying the group.','integer',
+'','0','integer')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('qw_group_attr_map','qw_ga_mp','qw_group_attr_map','group_id;object_id;attr_id',
+'','','','new','','','','',
+'0')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'values','qw_group_attr_map','values',
+'Attribute Values','',
+'The possible values this group can update or create. Use this if the values allowed for a group are limited.','',
+'','1000','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'ops','qw_group_attr_map','ops',
+'Operations','',
+'The operations allowed to be performed by the group on this attribute.','',
+'','100','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'gid','qw_group_attr_map','group_id',
+'Group ID','',
+'The Group ID to map.','integer',
+'','0','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'oid','qw_group_attr_map','object_id',
+'Object ID','',
+'The Object ID to map.','',
+'','100','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'aid','qw_group_attr_map','attr_id',
+'Attribute ID','',
+'The Attribute ID to map.','',
+'','100','integer')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('fn_types','fn_types','qw_fn_types','type',
+'','','','new;set;del','','','','',
+'0')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'name','fn_types','name',
+'Type Name','',
+'The type of function.','',
+'','30','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'description','fn_types','description',
+'Type Description','',
+'The description of the function type.','',
+'','100','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'type','fn_types','type',
+'Function Type ID','',
+'The identifier for the function type.','integer',
+'','0','integer')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('qw_fn','qw_fn','qw_fns','fn_id',
+'fn_id;set fn_id \[db_string fn_nextval \"select nextval(''qw_fn_sequence'')\"\]','','','new;set;del','','','','',
+'0')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'name','qw_fn','name',
+'Function Name','',
+'Actual name of the function. This could be ''new'' or ''fn__new'' or ''fn.new''.','',
+'','30','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'description','qw_fn','description',
+'Function Description','',
+'The description of what the function does.','',
+'','100','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'joiner','qw_fn','joiner',
+'Joiner Characters','null',
+'Characters with join the object and the function name to form the full function name. Oracle uses a joiner of ''.'' and in OACS postgresql a joiner of ''__'' is used. No Joiner implies that the full name is obtained without reference to the object, only the name attribute of qw_fns.','',
+'','10','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'id','qw_fn','fn_id',
+'Function ID','',
+'The function identifier.','integer',
+'','0','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'oid','qw_fn','object_id',
+'Object ID','',
+'The object id this function applies to.','',
+'','100','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'active','qw_fn','active_p',
+'Active','''0''',
+'If the function is active, and should be used.','integer',
+'0;1','0','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'type','qw_fn','type',
+'Function Type','',
+'The type of function: new set del rst, etc.','integer',
+'','0','integer')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('fn_attr','fn_attr','qw_fn_attrs','fn_id;attr',
+'','','','new','','','','',
+'0')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'attr','fn_attr','attr',
+'Attribute','',
+'Function attribute.','',
+'','100','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'default','fn_attr','default_value',
+'Default Value','',
+'The attribute default value to use when a value is not provided for new and reset function types. If the default is null, use an unquoted null. If the default is a string value, use the quoted string, even for integer values.','',
+'','100','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'fnid','fn_attr','fn_id',
+'Function ID','',
+'The function this attribute is for.','integer',
+'','0','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'order','fn_attr','attr_order',
+'Attribute Order','',
+'The order of the attribute in the function call. Only relative numbering is important.','integer',
+'','0','integer')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('cust_id','customer','customers','customer_id',
+'','','','new;set;rst;del','customer__new','customer__new','customer__delete','customer__reset_attrs',
+'1')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_external_id','cust_id','cust_external_id',
+'cust_external_id','',
+'External Id used to identify the customer','',
+'','127','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'customer_id','cust_id','customer_id',
+'customer_id','',
+'','integer',
+'','','int4')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_name','cust_id','cust_name',
+'cust_name','',
+'The customer Name','',
+'','127','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_type','cust_id','cust_type',
+'cust_type','1',
+'Type of customer.','integer',
+'','','int4')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('cid','cust','customers','customer_id',
+'','','','new;set;del','cust__new','cust__set_attrs','cust__delete','cust__reset_attrs',
+'1')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_external_id','cid','cust_external_id',
+'cust_external_id','',
+'','',
+'','127','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'customer_id','cid','customer_id',
+'customer_id','',
+'','integer',
+'','','int4')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_name','cid','cust_name',
+'cust_name','',
+'','',
+'','127','varchar')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_type','cid','cust_type',
+'cust_type','1',
+'','integer',
+'','','int4')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('cust6','customer6','customers','customer_id',
+'','','','new;set;del','customer6__new','customer6__set_attrs','customer6__delete','customer6__reset_attrs',
+'1')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'customer_id','cust6','customer_id',
+'customer_id','',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_name','cust6','cust_name',
+'cust_name','',
+'','',
+'','127','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_type','cust6','cust_type',
+'cust_type','1',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_external_id','cust6','cust_external_id',
+'cust_external_id','',
+'','',
+'','127','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'object_type','cust6','object_type',
+'object_type','''customer6''',
+'','',
+'','100','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'title','cust6','title',
+'title','NULL::character varying',
+'','',
+'','1000','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'package_id','cust6','package_id',
+'package_id','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'context_id','cust6','context_id',
+'context_id','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'security_inherit_p','cust6','security_inherit_p',
+'security_inherit_p','true',
+'','',
+'','','boolean')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'creation_user','cust6','creation_user',
+'creation_user','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'creation_date','cust6','creation_date',
+'creation_date','now()',
+'','',
+'','','timestamp with time zone')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'creation_ip','cust6','creation_ip',
+'creation_ip','null',
+'','',
+'','50','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'last_modified','cust6','last_modified',
+'last_modified','now()',
+'','',
+'','','timestamp with time zone')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'modifying_user','cust6','modifying_user',
+'modifying_user','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'modifying_ip','cust6','modifying_ip',
+'modifying_ip','null',
+'','',
+'','50','character varying')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('cust2','customer2','customers','customer_id',
+'context_id;set context_id \[ad_conn user_id\];
+creation_user;set creation_user \[ad_conn user_id\];creation_date;set creation_date now();creation_ip;set creation_ip \[ns_conn peeraddr\]','','','new;set;del','customer2__new','customer2__set_attrs','customer2__delete','customer2__reset_attrs',
+'1')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'customer_id','cust2','customer_id',
+'customer_id','',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_name','cust2','cust_name',
+'cust_name','',
+'','',
+'','127','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_type','cust2','cust_type',
+'cust_type','1',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_external_id','cust2','cust_external_id',
+'cust_external_id','',
+'','',
+'','127','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'object_type','cust2','object_type',
+'object_type','''customer2''',
+'','',
+'','100','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'title','cust2','title',
+'title','NULL::character varying',
+'','',
+'','1000','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'package_id','cust2','package_id',
+'package_id','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'context_id','cust2','context_id',
+'context_id','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'security_inherit_p','cust2','security_inherit_p',
+'security_inherit_p','true',
+'','',
+'','','boolean')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'creation_user','cust2','creation_user',
+'creation_user','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'creation_date','cust2','creation_date',
+'creation_date','now()',
+'','',
+'','','timestamp with time zone')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'creation_ip','cust2','creation_ip',
+'creation_ip','null',
+'','',
+'','50','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'last_modified','cust2','last_modified',
+'last_modified','now()',
+'','',
+'','','timestamp with time zone')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'modifying_user','cust2','modifying_user',
+'modifying_user','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'modifying_ip','cust2','modifying_ip',
+'modifying_ip','null',
+'','',
+'','50','character varying')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('cust3','customer3','customers','customer_id',
+'context_id;set context_id \[ad_conn user_id\];creation_user;set creation_user \[ad_conn user_id\];creation_date;set creation_date now();creation_ip;set creation_ip \[ns_conn peeraddr\]','','','new;set;del','customer3__new','customer3__set_attrs','customer3__delete','customer3__reset_attrs',
+'1')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'customer_id','cust3','customer_id',
+'customer_id','',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_name','cust3','cust_name',
+'cust_name','',
+'','',
+'','127','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_type','cust3','cust_type',
+'cust_type','1',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_external_id','cust3','cust_external_id',
+'cust_external_id','',
+'','',
+'','127','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'object_type','cust3','object_type',
+'object_type','''customer3''',
+'','',
+'','100','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'title','cust3','title',
+'title','NULL::character varying',
+'','',
+'','1000','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'package_id','cust3','package_id',
+'package_id','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'context_id','cust3','context_id',
+'context_id','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'security_inherit_p','cust3','security_inherit_p',
+'security_inherit_p','true',
+'','',
+'','','boolean')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'creation_user','cust3','creation_user',
+'creation_user','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'creation_date','cust3','creation_date',
+'creation_date','now()',
+'','',
+'','','timestamp with time zone')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'creation_ip','cust3','creation_ip',
+'creation_ip','null',
+'','',
+'','50','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'last_modified','cust3','last_modified',
+'last_modified','now()',
+'','',
+'','','timestamp with time zone')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'modifying_user','cust3','modifying_user',
+'modifying_user','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'modifying_ip','cust3','modifying_ip',
+'modifying_ip','null',
+'','',
+'','50','character varying')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('cust4','cust4','customers','customer_id',
+'context_id;set context_id \[ad_conn user_id\]; creation_user;set creation_user \[ad_conn user_id\];creation_date;set creation_date now();creation_ip;set creation_ip \[ns_conn peeraddr\]','','','new;set;del','cust4__new','cust4__set_attrs','cust4__delete','cust4__reset_attrs',
+'1')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'customer_id','cust4','customer_id',
+'customer_id','',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_name','cust4','cust_name',
+'cust_name','',
+'','',
+'','127','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_type','cust4','cust_type',
+'cust_type','1',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'cust_external_id','cust4','cust_external_id',
+'cust_external_id','',
+'','',
+'','127','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'object_type','cust4','object_type',
+'object_type','''cust4''',
+'','',
+'','100','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'title','cust4','title',
+'title','NULL::character varying',
+'','',
+'','1000','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'package_id','cust4','package_id',
+'package_id','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'context_id','cust4','context_id',
+'context_id','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'security_inherit_p','cust4','security_inherit_p',
+'security_inherit_p','true',
+'','',
+'','','boolean')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'creation_user','cust4','creation_user',
+'creation_user','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'creation_date','cust4','creation_date',
+'creation_date','now()',
+'','',
+'','','timestamp with time zone')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'creation_ip','cust4','creation_ip',
+'creation_ip','null',
+'','',
+'','50','character varying')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'last_modified','cust4','last_modified',
+'last_modified','now()',
+'','',
+'','','timestamp with time zone')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'modifying_user','cust4','modifying_user',
+'modifying_user','null',
+'','integer',
+'','','integer')"
+db_dml insert_object_attr "insert into qw_attrs (attr_id,object_id,attr,
+description,default_value,help_text,filters,values,length,datatype) values (
+'modifying_ip','cust4','modifying_ip',
+'modifying_ip','null',
+'','',
+'','50','character varying')"
+db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
+to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
+perm_p) values ('cust5','customer5','customer5','customer_id',
+'','','','new;set;del','','','','',
+'1')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','id',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','ops',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','permp',
+'1;0','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','rstfn',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','delfn',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','setfn',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','delperms',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','setperms',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','key',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','eval',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','newfn',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','table',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_object','object',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_attr','default',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_attr','objectid',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_attr','description',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_attr','values',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_attr','attr',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_attr','help',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_attr','id',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_attr','length',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_attr','datatype',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_attr','filters',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_attr','attr_order',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_attr','attr_table',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_group','id',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_group','name',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_group_attr_map','aid',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_group_attr_map','gid',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_group_attr_map','oid',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_group_attr_map','values',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_group_attr_map','ops',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','fn_types','type',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','fn_types','description',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','fn_types','name',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_fn','id',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_fn','type',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_fn','joiner',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_fn','active',
+'0;1','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_fn','name',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_fn','description',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','qw_fn','oid',
+'','new;set;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','fn_attr','default',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','fn_attr','fnid',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','fn_attr','attr',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','fn_attr','order',
+'','new')"
+
+set fn_id [db_string fn_nextval "select nextval('qw_fn_sequence')"]
+
+db_dml insert_qw_fn "insert into qw_fns (fn_id,object_id,type,
+name,description,joiner,active_p) values ('$fn_id','cust_id',
+'1',
+'customer__new','','',
+'1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('customer_id','$fn_id', 
+'null','1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_type','$fn_id', 
+'1','2')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_name','$fn_id', 
+'','3')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_external_id','$fn_id', 
+'','4')"
+
+set fn_id [db_string fn_nextval "select nextval('qw_fn_sequence')"]
+
+db_dml insert_qw_fn "insert into qw_fns (fn_id,object_id,type,
+name,description,joiner,active_p) values ('$fn_id','cust_id',
+'2',
+'customer__update','','',
+'1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('customer_id','$fn_id', 
+'','1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_name','$fn_id', 
+'','2')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_type','$fn_id', 
+'1','3')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_external_id','$fn_id', 
+'','4')"
+
+set fn_id [db_string fn_nextval "select nextval('qw_fn_sequence')"]
+
+db_dml insert_qw_fn "insert into qw_fns (fn_id,object_id,type,
+name,description,joiner,active_p) values ('$fn_id','cust_id',
+'3',
+'customer__delete','','',
+'1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('customer_id','$fn_id', 
+'','1')"
+
+set fn_id [db_string fn_nextval "select nextval('qw_fn_sequence')"]
+
+db_dml insert_qw_fn "insert into qw_fns (fn_id,object_id,type,
+name,description,joiner,active_p) values ('$fn_id','cust_id',
+'4',
+'customer__reset','','',
+'1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_external_id','$fn_id', 
+'','1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_name','$fn_id', 
+'','2')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_type','$fn_id', 
+'1','3')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('customer_id','$fn_id', 
+'','4')"
+
+set fn_id [db_string fn_nextval "select nextval('qw_fn_sequence')"]
+
+db_dml insert_qw_fn "insert into qw_fns (fn_id,object_id,type,
+name,description,joiner,active_p) values ('$fn_id','cust_id',
+'2',
+'customer__update','additional function for updating','',
+'1')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust_id','cust_name',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust_id','customer_id',
+'','new;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust_id','cust_name',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust_id','cust_type',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust_id','cust_type',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust_id','cust_external_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust_id','customer_id',
+'','new;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust_id','cust_external_id',
+'','new;set')"
+
+set fn_id [db_string fn_nextval "select nextval('qw_fn_sequence')"]
+
+db_dml insert_qw_fn "insert into qw_fns (fn_id,object_id,type,
+name,description,joiner,active_p) values ('$fn_id','cust6',
+'2',
+'set_attrs','Set Attrs with modifying info','__',
+'1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('customer_id','$fn_id', 
+'','1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_name','$fn_id', 
+'','2')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_external_id','$fn_id', 
+'','3')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('modifying_user','$fn_id', 
+'null','4')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('modifying_ip','$fn_id', 
+'null','5')"
+
+set fn_id [db_string fn_nextval "select nextval('qw_fn_sequence')"]
+
+db_dml insert_qw_fn "insert into qw_fns (fn_id,object_id,type,
+name,description,joiner,active_p) values ('$fn_id','cust6',
+'1',
+'new','Create New object','__',
+'1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_type','$fn_id', 
+'1','2')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_name','$fn_id', 
+'','3')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_external_id','$fn_id', 
+'','4')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('customer_id','$fn_id', 
+'null','1')"
+
+set fn_id [db_string fn_nextval "select nextval('qw_fn_sequence')"]
+
+db_dml insert_qw_fn "insert into qw_fns (fn_id,object_id,type,
+name,description,joiner,active_p) values ('$fn_id','cust6',
+'1',
+'new','Create New Customer','__',
+'1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_type','$fn_id', 
+'1','2')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_name','$fn_id', 
+'','3')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_external_id','$fn_id', 
+'','4')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('context_id','$fn_id', 
+'null','5')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('creation_ip','$fn_id', 
+'null','6')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('customer_id','$fn_id', 
+'null','1')"
+
+set fn_id [db_string fn_nextval "select nextval('qw_fn_sequence')"]
+
+db_dml insert_qw_fn "insert into qw_fns (fn_id,object_id,type,
+name,description,joiner,active_p) values ('$fn_id','cust6',
+'3',
+'delete','Delete Customer','__',
+'1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('customer_id','$fn_id', 
+'','1')"
+
+set fn_id [db_string fn_nextval "select nextval('qw_fn_sequence')"]
+
+db_dml insert_qw_fn "insert into qw_fns (fn_id,object_id,type,
+name,description,joiner,active_p) values ('$fn_id','cust6',
+'2',
+'set_attrs','Update Customer','__',
+'1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('customer_id','$fn_id', 
+'','1')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_name','$fn_id', 
+'','2')"
+db_dml insert_fn_attr "insert into qw_fn_attrs (attr,fn_id,
+default_value, attr_order) values ('cust_external_id','$fn_id', 
+'','3')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','modifying_user',
+'','')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','object_type',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','package_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','package_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','security_inherit_p',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','cust_name',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','security_inherit_p',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','creation_date',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','cust_name',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','creation_date',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','last_modified',
+'','set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','cust_external_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','last_modified',
+'','')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','cust_external_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','title',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','modifying_ip',
+'','set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','title',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','modifying_ip',
+'','')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','context_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','customer_id',
+'','new;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','context_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','creation_user',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','customer_id',
+'','new;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','creation_user',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','cust_type',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','creation_ip',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','cust_type',
+'1','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust6','creation_ip',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','modifying_user',
+'','set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust6','object_type',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','modifying_user',
+'','')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','object_type',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','package_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','package_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','security_inherit_p',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','cust_name',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','security_inherit_p',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','creation_date',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','cust_name',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','creation_date',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','last_modified',
+'','set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','cust_external_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','last_modified',
+'','')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','cust_external_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','title',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','modifying_ip',
+'','set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','title',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','modifying_ip',
+'','')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','context_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','customer_id',
+'','new;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','context_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','creation_user',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','customer_id',
+'','new;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','creation_user',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','cust_type',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','creation_ip',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','cust_type',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust2','creation_ip',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','modifying_user',
+'','set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust2','object_type',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','modifying_user',
+'','')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','object_type',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','package_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','package_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','security_inherit_p',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','cust_name',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','security_inherit_p',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','creation_date',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','cust_name',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','creation_date',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','last_modified',
+'','set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','cust_external_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','last_modified',
+'','')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','cust_external_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','title',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','modifying_ip',
+'','set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','title',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','modifying_ip',
+'','')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','context_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','customer_id',
+'','new;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','context_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','creation_user',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','customer_id',
+'','new;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','creation_user',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','cust_type',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','creation_ip',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','cust_type',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust3','creation_ip',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','modifying_user',
+'','set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust3','object_type',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','modifying_user',
+'','')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','object_type',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','package_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','package_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','security_inherit_p',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','cust_name',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','security_inherit_p',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','creation_date',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','cust_name',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','creation_date',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','last_modified',
+'','set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','cust_external_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','last_modified',
+'','')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','cust_external_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','title',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','modifying_ip',
+'','set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','title',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','modifying_ip',
+'','')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','context_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','customer_id',
+'','new;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','context_id',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','creation_user',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','customer_id',
+'','new;del')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','creation_user',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','cust_type',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','creation_ip',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','cust_type',
+'','new;set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('2','cust4','creation_ip',
+'','new')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','modifying_user',
+'','set')"
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
+(group_id,object_id,attr_id,values,ops) values ('1','cust4','object_type',
+'','new;set')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_set','cust_id','pl')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_del','cust_id','pl')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_new','cust_id','pl')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_set','cust6','pl')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_rst','cust6','pl')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_del','cust6','pl')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_new','cust6','pl')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_set','cust2','pl')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_rst','cust2','pl')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_del','cust2','pl')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_new','cust2','pl')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_set','cust3','pseudo')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_rst','cust3','pseudo')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_del','cust3','pseudo')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_new','cust3','pseudo')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_set','cust4','pseudo')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_rst','cust4','pseudo')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_del','cust4','pseudo')"
+db_dml nsv_map "insert into qw_nsv_map (nsv_name, nsv_element, nsv_value) 
+values
+ ('qw_new','cust4','pseudo')"
