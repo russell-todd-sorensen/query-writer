@@ -3,16 +3,16 @@
 -- Create Query Writer NSV Mapper Data Model
 --
 -- @author Tom Jackson (tom@junom.com)
+-- @author Russell Sorensen (russ@semitasker.com)
 -- @creation-date 9 February 2002
--- @cvs-id $Id: qw-obj-procs-create.sql,v 1.2 2003/07/30 18:19:55 tom Exp $
 --
 
 create table qw_nsv_map (
- nsv_name varchar(100) 
+ nsv_name varchar(100)
   constraint qop_nsv_name_nn not null,
  nsv_element varchar(100)
   constraint qop_nsv_element_nn not null,
- nsv_value varchar(100) 
+ nsv_value varchar(100)
   constraint qop_nsv_value_nn not null,
  constraint qop_table_pk primary key (nsv_name, nsv_element)
 );

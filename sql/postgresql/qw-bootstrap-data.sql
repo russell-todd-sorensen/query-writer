@@ -2,8 +2,8 @@
 -- Create Query Writer Bootstrap Data
 --
 -- @author Tom Jackson (tom@junom.com)
+-- @author Russell Sorensen (russ@semitasker.com)
 -- @creation-date 22 February 2002
--- @cvs-id $Id: qw-bootstrap-data.sql,v 1.1 2002/02/23 00:05:02 nsadmin Exp $
 --
 
 -- REPLACE 3990 with a group number for the DEFAULT GROUP
@@ -15,7 +15,7 @@
 insert into qw_groups (
  group_id,
  name
-) 
+)
 values
 (
  '1',
@@ -25,7 +25,7 @@ values
 insert into qw_groups (
  group_id,
  name
-) 
+)
 values
 (
  '3990',
@@ -215,8 +215,8 @@ insert into qw_objects (
  del_fn,
  rst_fn,
  perm_p
- ) 
-values 
+ )
+values
 (
  'address',
  'addrs',

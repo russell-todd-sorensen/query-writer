@@ -3,19 +3,19 @@
 -- Create Query Writer Objects Data Model
 --
 -- @author Tom Jackson (tom@junom.com)
+-- @author Russell Sorensen (russ@semitasker.com)
 -- @creation-date 26 January 2002
--- @cvs-id $Id: qw-objects-create.sql,v 1.5 2002/02/07 20:44:15 nsadmin Exp $
 --
 
 create table qw_objects (
- object_id varchar(100) 
-  constraint qwo_object_id_nn not null 
+ object_id varchar(100)
+  constraint qwo_object_id_nn not null
   constraint qwo_object_id_pk primary key,
- object varchar(100) 
-  constraint qwo_object_nn not null 
+ object varchar(100)
+  constraint qwo_object_nn not null
   constraint qwo_object_un unique,
  obj_table varchar(30),
- key varchar(150) 
+ key varchar(150)
   constraint qwo_key_nn not null,
  to_eval text,
  set_perm_check varchar(256),
@@ -41,9 +41,9 @@ create table qw_objects (
 
 
 comment on column qw_objects.object is '
- The purpose of having an object_id 
+ The purpose of having an object_id
 and a separate object is to allow
-hiding of the internal data structure 
+hiding of the internal data structure
 as well as flexability in naming.
  The object_id is the string that will be used
 in the naming of form variables. The object
@@ -53,7 +53,7 @@ the beginning of the function name in postgresql.
 ';
 
 comment on column qw_objects.obj_table is '
- The table column is used when regular sql 
+ The table column is used when regular sql
 insert/update/delete statements should be used.
 This allows the query writer package to work without
 pl/sql or plpgsql code. You cannot use the table field if
@@ -76,14 +76,14 @@ separated var eval pairs. Examples:
  price {[expr $cost * 1.2]}
 --
   In each case all passed in variables for an object
-will be available as well as the user_id and the 
+will be available as well as the user_id and the
 qw_group_id. Additional variables can be accessed
 by writing a tcl proc.
 ';
 
 comment on column qw_objects.set_perm_check is '
   During updates, the object_id is checked
-for the ''write'' privilege. Sometimes this is 
+for the ''write'' privilege. Sometimes this is
 not the correct privilege to check. If some other
 privilege should be checked for an object update,
 this field should be checked.
@@ -97,7 +97,7 @@ space separated list:
 
 comment on column qw_objects.del_perm_check is '
   During updates, the object_id is checked
-for the ''admin'' privilege. Sometimes this is 
+for the ''admin'' privilege. Sometimes this is
 not the correct privilege to check. If some other
 privilege should be checked for an object delete,
 this field should be used.

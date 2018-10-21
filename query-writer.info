@@ -10,14 +10,14 @@
     <inherit-templates-p>t</inherit-templates-p>
     <auto-mount>qw</auto-mount>
 
-    <version name="0.7.0" url="c:/naviserver/servers/openacs/apm-files/query-writer-0.7.0.apm">
-        <owner url="mailto:russell.todd.sorensen@gmail.com">Russell Sorensen</owner>
+    <version name="0.7.1" url="c:/naviserver/servers/openacs/apm-files/query-writer-0.7.1.apm">
+        <owner url="mailto:russ@semitasker.com">Russell Sorensen</owner>
         <summary>Writes dml and procedural language to insert, update or delete data from the database.</summary>
-        <release-date>2016-11-11</release-date>
+        <release-date>2018-10-21</release-date>
         <description format="text/plain">Writes dml and procedural language to insert, update or delete data from the database.</description>
         <maturity>0</maturity>
 
-        <provides url="query-writer" version="0.7.0"/>
+        <provides url="query-writer" version="0.7.1"/>
 
         <callbacks>
         </callbacks>

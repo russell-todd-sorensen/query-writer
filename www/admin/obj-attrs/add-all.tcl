@@ -2,8 +2,8 @@ ad_page_contract {
     Query Writer Bulk Add Attributes
     @author Tom Jackson <tom@junom.com>
     @creation-date 2003 July 17
-    @cvs-id $Id: add-all.tcl,v 1.1 2003/07/28 21:49:35 tom Exp $
-   
+    @revision-author Russell Sorensen <russ@semitasker.com>
+
 } {
 
     object_id:trim,notnull
@@ -27,7 +27,7 @@ set required_attributes 0
 while {1} {
 
     if {![db_0or1row first_trigger_query "
-select 
+select
  class.oid as table_oid,
  trig.tgargs
 from
@@ -35,7 +35,7 @@ from
  pg_trigger trig
 where
  class.relname = :parent_table and
- trig.tgtype = 21 and 
+ trig.tgtype = 21 and
  class.relfilenode = trig.tgrelid
 limit 1 "]} {
         break
@@ -45,22 +45,22 @@ limit 1 "]} {
     set args [list]
     set nextbreak [string first {\000} $tgargs $index]
     while {$nextbreak > -1} {
-        
+
         lappend args [string range $tgargs $index [expr $nextbreak -1]]
         set index [expr $nextbreak + 4]
         set nextbreak [string first {\000} $tgargs $index]
         incr count
     }
-    
+
     set table_name $table
     set trigger_name [lindex $args 0]
     set from_table [lindex $args 1]
     set ref_table [lindex $args 2]
     set from_attr [lindex $args 4]
-    set ref_attr [lindex $args 5]  
+    set ref_attr [lindex $args 5]
 
 
-    db_multirow  -append -extend { 
+    db_multirow  -append -extend {
         default
         table_name
     } attributes  "attribute_query_2" "
@@ -77,22 +77,22 @@ from
 where
  att.attrelid = :table_oid and
  att.attnum > 0 and
- att.atttypid = typ.oid 
+ att.atttypid = typ.oid
 order by att.attnum
 " {
    set table_name $parent_table
    set default ""
    if {[string match "t" $atthasdef]} {
        set default [db_string adsrc_query "
-select 
- adsrc 
-from 
- pg_attrdef 
+select
+ adsrc
+from
+ pg_attrdef
 where
  adrelid = :table_oid
 and
  adnum = :attnum"]
-    }  
+    }
       if {[string match "f" $attnotnull ] && [string match "f" $atthasdef]} {
           incr required_attributes
       }

@@ -1,7 +1,7 @@
 # @file: query-writer-procs.tcl
 # @author: Tom Jackson <tom@junom.com>
+# @author: Russell Sorensen <russ@semitasker.com>
 # @creation-date: 8 February 2002
-# @cvs-id: $Id: query-writer-procs.tcl,v 1.28 2003/11/07 06:58:43 tom Exp $
 source "C:/naviserver/servers/openacs/packages/twist/twist-0.9.34/init.tcl"
 namespace eval ::qw {}
 

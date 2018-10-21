@@ -3,7 +3,7 @@ ad_page_contract {
     Query Writer Wizard Step 5: Choose Procedural Language
     @author Tom Jackson <tom@junom.com>
     @creation-date 2003 July 25
-    @cvs-id $Id: wizard-5.tcl,v 1.2 2003/12/18 17:31:31 tom Exp $
+    @revision-author Russell Sorensen <russ@semitasker.com>
 } {
     object_id:notnull
 } -properties {

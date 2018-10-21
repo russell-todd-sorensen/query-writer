@@ -1,7 +1,7 @@
 # @file: query-writer-init.tcl
 # @author: Tom Jackson <tom@junom.com>
+# @author: Russell Sorensen <russ@semitasker.com>
 # @creation-date: 7 February 2002
-# @cvs-id: $Id: query-writer-init.tcl,v 1.11 2003/11/07 06:58:43 tom Exp $
 
 # load qw bootstrap data if the qw tables are empty.
 
@@ -12,7 +12,7 @@ from
  qw_objects"]
 
 if {[string match "0" $rowcount]} {
-    
+
     ns_log Notice "Loading Query Writer Bootstrap Data..."
     source "[acs_package_root_dir query-writer]/tcl/query-writer-bootstrap.tcl.data"
     ns_log Notice "Done loading Query Writer Bootstrap Data."
@@ -30,35 +30,35 @@ from
 order by
  group_id,object_id,attr_id" {
 
-      qw_attr_perm_map $group_id $object_id $attr_id $values $ops 
- 
- } 
+      qw_attr_perm_map $group_id $object_id $attr_id $values $ops
+
+ }
 
 ## MAP IDS TO OBJECTS AND ATTRS ##
 
-db_foreach map_id_to_attr_qry "    
-select    
- object_id,   
- attr_id, 
- attr 
-from 
- qw_attrs 
-order by object_id " {   
+db_foreach map_id_to_attr_qry "
+select
+ object_id,
+ attr_id,
+ attr
+from
+ qw_attrs
+order by object_id " {
     qw_map_id_to_attr $object_id $attr_id $attr
-   
-}  
-  
- 
-db_foreach map_id_to_object_qry "    
-select    
- object_id,    
- object 
-from  
- qw_objects " {   
-  
+
+}
+
+
+db_foreach map_id_to_object_qry "
+select
+ object_id,
+ object
+from
+ qw_objects " {
+
     qw_map_id_to_object $object_id $object
-  
-} 
+
+}
 
 
 ## MAP FILTERS AND ATTR DATATYPE#
@@ -74,18 +74,18 @@ from
 
      qw_map_filter $object_id $attr_id $filters
      qw_map_datatype $object_id $attr_id $datatype
- 
+
  }
 
 ###### MAP OBJECT PROPERTIES #########
 
 db_foreach object_properties_qry "
 select
- object_id 
+ object_id
 from
  qw_objects " {
 
-    qw_map_obj_properties $object_id 
+    qw_map_obj_properties $object_id
 
 
  }
@@ -103,7 +103,7 @@ from
  qw_nsv_map " {
 
     qw_map_nsv $nsv_name $nsv_element $nsv_value
- 
+
 
 
  }
@@ -123,7 +123,7 @@ where
  length > 0 " {
 
     qw_map_attr_length $object_id $attr_id $length
-  
+
 }
 
 # ATTR DESCRIPTION AND HELP TEXT #
@@ -138,7 +138,7 @@ from
  qw_attrs" {
 
     qw_map_attr_txt $object_id $attr_id "$description" "$help_text"
- 
+
 
  }
 
@@ -150,11 +150,11 @@ qw_write_obj_functions
 
 qw::init::callbacks
 
-# Filters 
+# Filters
 
-ad_page_contract_filter write_permission {name value} { 
+ad_page_contract_filter write_permission {name value} {
 
- <p>Checks if the current user has write permission on the object. 
+ <p>Checks if the current user has write permission on the object.
 
 } {
     ns_log Notice "Checking permission for [ad_conn user_id] to write $value"
@@ -164,11 +164,11 @@ ad_page_contract_filter write_permission {name value} {
     } else {
         return 1
     }
-    
-}
-ad_page_contract_filter read_permission {name value} { 
 
- <p>Checks if the current user has read permission on the object. 
+}
+ad_page_contract_filter read_permission {name value} {
+
+ <p>Checks if the current user has read permission on the object.
 
 } {
     ns_log Notice "Checking permission for [ad_conn user_id] to read $value"
@@ -178,6 +178,5 @@ ad_page_contract_filter read_permission {name value} {
     } else {
         return 1
     }
-    
-}
 
+}

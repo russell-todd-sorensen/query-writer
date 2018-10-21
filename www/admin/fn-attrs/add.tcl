@@ -3,7 +3,7 @@ ad_page_contract {
     Query Writer Manage Function Attributes
     @author Tom Jackson <tom@junom.com>
     @creation-date 22 February 2002
-    @cvs-id $Id: add.tcl,v 1.6 2003/12/18 17:30:24 tom Exp $
+    @revision-author Russell Sorensen <russ@semitasker.com>
 } {
     fn_id:trim,notnull
 } -properties {
@@ -22,7 +22,7 @@ where
 
     ad_return_complaint 1 "Function $fn_id not found"
 
-} 
+}
 
 set attr_list [db_list attrs_query "select attr from qw_fn_attrs where fn_id = :fn_id"]
 

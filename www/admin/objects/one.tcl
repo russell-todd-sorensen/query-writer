@@ -3,7 +3,7 @@ ad_page_contract {
     Query Writer One Object
     @author Tom Jackson <tom@junom.com>
     @creation-date 21 February 2002
-    @cvs-id $Id: one.tcl,v 1.2 2003/12/18 17:31:31 tom Exp $
+    @revision-author Russell Sorensen <russ@semitasker.com>
 } {
     object_id:trim,notnull
 } -properties {
@@ -15,7 +15,7 @@ ad_page_contract {
 
 if {![db_0or1row qw_object_qry "
 select
- * 
+ *
 from
  qw_objects
 where
