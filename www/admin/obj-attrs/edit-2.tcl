@@ -1,8 +1,9 @@
 ad_page_contract {
 
     Query Writer Edit Object Attribute Page 2
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson <tom@junom.com>
     @creation-date 22 February 2002
+    @cvs-id $Id: edit-2.tcl,v 1.2 2002/03/17 01:19:29 nsadmin Exp $
 } {
 
     object_id:trim,notnull
@@ -16,7 +17,7 @@ ad_page_contract {
     {description:trim ""}
     {help_text:trim ""}
 
-}
+} 
 
 set sql "
 update

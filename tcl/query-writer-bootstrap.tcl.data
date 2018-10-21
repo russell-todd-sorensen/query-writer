@@ -1,6 +1,6 @@
-
+# cvs-id: $Id$ 
 catch {db_dml insert_group "insert into qw_groups (group_id, name) values (
-'1','QW Admin')" }
+'1','QW Admin')" } 
 db_dml insert_qw_object "insert into qw_objects (object_id,object,obj_table,key,
 to_eval,set_perm_check,del_perm_check,ops,new_fn,set_fn,del_fn,rst_fn,
 perm_p) values ('qw_object','qw_object','qw_objects','object_id',
@@ -312,141 +312,142 @@ description,default_value,help_text,filters,values,length,datatype) values (
 'Attribute Order','',
 'The order of the attribute in the function call. Only relative numbering is important.','integer',
 '','0','integer')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','id',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','ops',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','permp',
 '1;0','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','rstfn',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','delfn',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','setfn',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','delperms',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','setperms',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','key',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','eval',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','newfn',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','table',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_object','object',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_attr','default',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_attr','objectid',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_attr','description',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_attr','values',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_attr','attr',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_attr','help',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_attr','id',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_attr','length',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_attr','datatype',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_attr','filters',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_attr','attr_order',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_attr','attr_table',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_group','id',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_group','name',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_group_attr_map','aid',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_group_attr_map','gid',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_group_attr_map','oid',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_group_attr_map','values',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_group_attr_map','ops',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','fn_types','type',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','fn_types','description',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','fn_types','name',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_fn','id',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_fn','type',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_fn','joiner',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_fn','active',
 '0;1','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_fn','name',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_fn','description',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','qw_fn','oid',
 '','new;set;del')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','fn_attr','default',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','fn_attr','fnid',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','fn_attr','attr',
 '','new')"
-db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map
+db_dml  insert_qroup_attr_mapping "insert into qw_group_attr_map 
 (group_id,object_id,attr_id,values,ops) values ('1','fn_attr','order',
 '','new')"
+

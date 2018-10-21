@@ -1,8 +1,9 @@
 ad_page_contract {
 
     Query Writer Add Attributes Page 1
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson <tom@junom.com>
     @creation-date 2003 July 21
+    @cvs-id $Id: wizard-2.tcl,v 1.2 2003/12/18 17:31:31 tom Exp $
 } {
     object_id:trim,notnull
 }

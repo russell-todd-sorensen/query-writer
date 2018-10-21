@@ -1,8 +1,9 @@
 ad_page_contract {
 
     Query Writer
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson <tom@junom.com>
     @creation-date 29 January 2002
+    @cvs-id $Id: qw.tcl,v 1.39 2003/11/07 06:58:00 tom Exp $
 } {
     new:array,trim,optional,allhtml
     set:array,trim,optional,allhtml
@@ -157,5 +158,6 @@ if {[string first "\[" $return_url] > -1} {
     # potential command in return_url just return
     ad_returnredirect $return_url
 } else {
-    ad_returnredirect  [subst $return_url]
+    #ad_returnredirect  [subst $return_url]
+    ns_returnredirect [subst $return_url]
 }

@@ -1,13 +1,15 @@
 ad_library {
 
     Replacement procs for Query Writer
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson (tom@rmadilo.com)
     @creation-date 2003 October 12
+    @cvs-id $Id: replacement-procs.tcl,v 1.1 2003/11/07 06:59:26 tom Exp $
+
 }
 
 
 
-ad_proc qw_get_group_id {
+ad_proc qw_get_group_id { 
 
     {-group ""}
 
@@ -56,10 +58,10 @@ and
 	        } else {
 	            return 0
 	        }
-	    }
+	    } 
 
     }
-
+    
     set sql "
 select
  rel_type
@@ -74,14 +76,16 @@ and
  m.member_id = :user_id"
 
     if {[db_0or1row rel_type $sql]} {
-
+	
         if {[nsv_exists "qw_($group)" $rel_type]} {
             return [nsv_get "qw_($group)" $rel_type]
         } else {
             return 0
         }
-
+	
     } else {
         return 0
     }
-}
+} 
+
+

@@ -1,8 +1,9 @@
 ad_page_contract {
 
     Query Writer Admin Update Group Permissions Page 2
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson <tom@junom.com>
     @creation-date 25 March 2002
+    @cvs-id $Id: perm-update-2.tcl,v 1.1 2002/04/01 18:50:53 stellar2 Exp $
 } {
     object_id:notnull,trim
     group_id:notnull,integer
@@ -16,7 +17,7 @@ ad_page_contract {
 }
 
 set dml "
-update
+update 
  qw_group_attr_map
 set
  ops = :ops,

@@ -1,8 +1,9 @@
 ad_page_contract {
 
     Query Writer Admin Update Group Permissions
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson <tom@junom.com>
     @creation-date 25 March 2002
+    @cvs-id $Id: perm-update.tcl,v 1.2 2003/12/18 17:30:47 tom Exp $
 } {
     object_id:notnull
     {group_id:integer "1"}
@@ -30,7 +31,7 @@ where
 and
  a.attr_id = m.attr_id
 and
- a.object_id = m.object_id
+ a.object_id = m.object_id 
 order by
  m.group_id , a.attr"
 
@@ -42,3 +43,4 @@ set title "Query Writer Update Group Permissions for $object_id "
 set context [list "$title"]
 
 set return_url  "/qw/admin/objects/one?object_id=$object_id"
+

@@ -1,8 +1,9 @@
 ad_page_contract {
 
     Query Writer Admin Map Group Permissions
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson <tom@junom.com>
     @creation-date 21 February 2002
+    @cvs-id $Id: perm-map.tcl,v 1.3 2003/12/18 17:30:47 tom Exp $
 } {
     object_id:notnull
     {group_id:integer "1"}
@@ -28,7 +29,7 @@ where
 if {![db_0or1row group_query "
 select
  group_id,
- name as group_name
+ name as group_name 
 from
  qw_groups
 where
@@ -56,7 +57,7 @@ where
 and
 (
  m.group_id != :group_id
-or
+or 
  m.group_id is null
  )
 order by
@@ -70,3 +71,4 @@ set title "Query Writer Map Group Permissions for $object to $group_name"
 set context [list "$title"]
 
 set return_url [ad_quotehtml "/qw/admin/objects?object_id=$object_id"]
+

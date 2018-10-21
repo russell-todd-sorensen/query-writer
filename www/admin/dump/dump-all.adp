@@ -1,3 +1,3 @@
 <pre>
-@data@
+@data;noquote@
 </pre>

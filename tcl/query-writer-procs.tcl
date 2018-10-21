@@ -1,9 +1,8 @@
 # @file: query-writer-procs.tcl
-# @author: Russell Sorensen (russell.todd.sorensen@gmail.com)
+# @author: Tom Jackson <tom@junom.com>
 # @creation-date: 8 February 2002
-
-#source "C:/naviserver/servers/openacs/tcl/twist/twist-0.9.10/init.tcl"
-
+# @cvs-id: $Id: query-writer-procs.tcl,v 1.28 2003/11/07 06:58:43 tom Exp $
+source "C:/naviserver/servers/openacs/packages/twist/twist-0.9.34/init.tcl"
 namespace eval ::qw {}
 
 namespace eval ::qw::array {}
@@ -41,7 +40,7 @@ ad_proc -public qw_write_fn {object attrs}  {
     }
 
     set attrs_and_defaults [eval qw_choose_function $object $in_args]
-
+    log InfoDebug "qw_write_fn: attrs_and_defaults = $attrs_and_defaults"
     foreach {attr default_value} $attrs_and_defaults {
 
       # see if attr was passed in with value
@@ -50,9 +49,9 @@ ad_proc -public qw_write_fn {object attrs}  {
       if {![info exists attr_array($attr)]} {
 
         if {[string match "" "$default_value"]} {
-            ns_log Error "Attempt to call $object with no value for $attr"
-            ns_return 200 text/plain "Attempt to call object $object with no value for $attr, which cannot be null."
-            return -code error
+            log Error "Attempt to call $object with no value for $attr"
+            #ns_return 200 text/plain "Attempt to call object $object with no value for $attr, which cannot be null."
+            return -code error -errorinfo "Attempt to call object $object with no value for $attr, which cannot be null."
         }
 
         lappend query "$default_value"
@@ -100,14 +99,14 @@ ad_proc -private qw_total_attributes {object attributes} {
 } {
     upvar $object object_array
     upvar $attributes attrs
-    set total 0
-
+    set total [expr {wide(0)}]
+    set output "qw_total_attributes for $object \n"
     foreach attribute $attrs {
       log InfoDebug "Adding $attribute"
-      incr total $object_array($attribute)
-
+      set total [expr {wide($total) + wide($object_array($attribute))}]
+      append output "adding $attribute value $object_array($attribute) total $total\n"
     }
-
+    #log Notice $output
     return $total
 }
 
@@ -125,6 +124,7 @@ ad_proc qw_add_function {object args} {
 
 } {
     # total up the function value.
+    log InfoDebug "qw_add_function object='$object'"
     array set temp_object [nsv_array get qw_attr_val_$object]
     set i 1
 
@@ -145,15 +145,18 @@ ad_proc -private qw_choose_function {object args} {
     attributes passed in.
 
 } {
+    # added qw_attr_val_ to $object below
     array set temp_object [nsv_array get qw_attr_val_$object]
-    log InfoDebug "Getting Array: qw_attr_val_$object"
+    log InfoDebug "qw_choose_function object='$object' temp_object='[array get temp_object]'"
+    log InfoDebug "qw_choose_function Getting Array: qw_attr_val_$object"
 
     if {[catch {
         set total [qw_total_attributes temp_object args]
     } err ]} {
-        ns_return 200 text/plain "Attribute or Array Not found: qw_attr_val_$object
-Probably the attribute has not been added yet, or the function is misnamed."
-        return -code return
+        #ns_return 200 text/plain "Attribute or Array Not found: qw_attr_val_$object
+#Probably the attribute has not been added yet, or the function is misnamed."
+        global errorInfo
+        return -code error -errorinfo [list qw_choose_function qw_attr_val_$object array doesnt exist 'err=$err' errorInfo=$errorInfo]
     }
 
     if {[nsv_exists qw_${object}_functions $total]} {
@@ -166,13 +169,13 @@ Probably the attribute has not been added yet, or the function is misnamed."
     foreach sig $functions {
       log InfoDebug "checking sig '$total' against '$sig'"
 
-      if {$total == [expr $sig & $total]} {
+      if {[expr {wide($total)}] == [expr {wide($sig) & wide($total)}]} {
         log InfoDebug "Found match '$total' in '$sig'"
         return [nsv_get qw_${object}_functions $sig]
       }
     }
 
-    ns_log Error "!NO MATCH: $total not in $functions"
+    log Error "!NO MATCH: $total not in $functions"
     return -code error
 }
 
@@ -375,12 +378,28 @@ ad_proc -private qw_set_pl_postgresql { } {
       foreach ATTR [array names ARR] {
 
         # set each ATTR to local var.
+        set ATTRTYPE [nsv_get qw_datatype ${OBJECT}.$ATTR]
+        switch -glob -nocase -- $ATTRTYPE {
+            "timestamp*" {
+                set ATTRTYPE "timestamptz"
+            }
+            "character" {
+              # do nothing
+            }
+            "character varying" {
+                # do nothing
+                set ATTRTYPE "varchar"
+            }
+            "char*" {
+                set ATTRTYPE "varchar"
+            }
+        }
         set $ATTR $ARR($ATTR)
 
         if {![empty_string_p $ARR($ATTR)]} {
-          lappend ATTR_LIST "[nsv_get qw_id_to_attr ${OBJECT}.${ATTR}] => :$ATTR"
+          lappend ATTR_LIST "[nsv_get qw_id_to_attr ${OBJECT}.${ATTR}] => :${ATTR}::$ATTRTYPE"
         } else {
-          lappend ATTR_LIST "[nsv_get qw_id_to_attr ${OBJECT}.${ATTR}] => ''"
+          lappend ATTR_LIST "[nsv_get qw_id_to_attr ${OBJECT}.${ATTR}] => null::$ATTRTYPE"
         }
 
             }
@@ -388,7 +407,12 @@ ad_proc -private qw_set_pl_postgresql { } {
       # set the primary key attr
       set PKEY [nsv_get qw_obj_key $OBJECT]
       set $PKEY $ID
-      lappend ATTR_LIST "$PKEY => :$PKEY"
+      if {[string is integer -strict $ID]} {
+        set KEYATTRTYPE integer
+      } else {
+        set KEYATTRTYPE varchar
+      }
+      lappend ATTR_LIST "$PKEY => :${PKEY}::$KEYATTRTYPE"
 
       append PL "select [qw_write_fn [nsv_get qw_set_fn $OBJECT] [subst { [join $ATTR_LIST "\n"]}]] "
 
@@ -426,6 +450,7 @@ ad_proc -private qw_set_dml_postgresql { } {
       set $PKEY $ID
 
       append DML "update [nsv_get qw_obj_table $OBJECT] set [join $ATTR_LIST ", "] where $PKEY = :$PKEY"
+      log Notice "DML ='$DML'"
       db_dml qw_set_dml_postgresql $DML
     }
 }
@@ -457,7 +482,7 @@ ad_proc -public qw_del { id object } {
         [nsv_get qw_obj_del dml] ;# qw_del_dml_postgresql
     } else {
         # no way to delete object, ignore and log
-        ns_log Error "qw_del: No Method to delete object '$object' with id '$id'"
+        log Error "qw_del: No Method to delete object '$object' with id '$id'"
     }
 
 }
@@ -499,7 +524,7 @@ ad_proc -public qw_new {
         if {[nsv_exists qw_object_files_new $OBJECT]} {
             [nsv_get qw_object_files_new $OBJECT] $FILES ARR
         } else {
-            ns_log Error "File upload for object $OBJECT without handler."
+            log Error "File upload for object $OBJECT without handler."
         }
     }
 
@@ -521,7 +546,7 @@ ad_proc -public qw_new {
         [nsv_get qw_obj_new dml] ;# qw_new_dml_postgresql
     } else {
         # no way to create new object, ignore and log
-        ns_log Error "qw_new: No Method to insert new object '$OBJECT'"
+        log Error "qw_new: No Method to insert new object '$OBJECT'"
     }
 
 
@@ -569,7 +594,7 @@ ad_proc -public qw_set { ID OBJECT ARRAY } {
       [nsv_get qw_obj_set dml] ;# qw_set_dml_postgresql
     } else {
       # no way to update object, ignore and log
-      ns_log Error "qw_set: No Method to update object '$OBJECT'"
+      log Error "qw_set: No Method to update object '$OBJECT'"
  }
 
 
@@ -912,13 +937,14 @@ order by qa.attr"
         } else {
             set _$fn_id [list]
             lappend _$fn_id "$attr"
-            }
+        }
 
         if {![string match "" $joiner]} {
             set full_function_name($fn_id) $object$joiner$name
         } else {
             set full_function_name($fn_id) $name
         }
+        log InfoDebug "---->>> full_function_name($fn_id)='$full_function_name($fn_id)'"
     }
 
     foreach name [array names full_function_name] {
@@ -1073,7 +1099,7 @@ ad_proc -private qw_new_pseudo_postgresql { } {
         }
             set qw_last_new_object_id $ACS_OBJECT_ID
         } on_error {
-            ns_log Error "Transaction error on $OBJECT_CALL $errmsg"
+            log Error "Transaction error on $OBJECT_CALL $errmsg"
             return ""
         }
      }
@@ -1096,12 +1122,11 @@ ad_proc -private qw_set_pseudo_postgresql { } {
         set $ATTR $ARR($ATTR)
 
         if {![empty_string_p $ARR($ATTR)]} {
-            lappend ATTR_LIST "[nsv_get qw_id_to_attr ${OBJECT}.${ATTR}]  = :$ATTR"
-        } elseif {[string match "integer" [nsv_get qw_datatype ${OBJECT}.${ATTR}]]} {
-            # Lars suggestion that empty string should mean null in case of integer.
-            lappend ATTR_LIST "[nsv_get qw_id_to_attr ${OBJECT}.${ATTR}]  = NULL"
+            lappend ATTR_LIST "[nsv_get qw_id_to_attr ${OBJECT}.${ATTR}]  = :${ATTR}::[nsv_get qw_datatype ${OBJECT}.${ATTR}]"
+        } elseif {[string match  date* [nsv_get qw_datatype ${OBJECT}.${ATTR}]]} {
+            lappend ATTR_LIST "[nsv_get qw_id_to_attr ${OBJECT}.${ATTR}] = NULL::[nsv_get qw_datatype ${OBJECT}.${ATTR}]"
         } else {
-            lappend ATTR_LIST "[nsv_get qw_id_to_attr ${OBJECT}.${ATTR}] = ''"
+            lappend ATTR_LIST "[nsv_get qw_id_to_attr ${OBJECT}.${ATTR}] = ''::[nsv_get qw_datatype ${OBJECT}.${ATTR}]"
         }
 
       }
@@ -1147,7 +1172,7 @@ ad_proc -private qw_del_pseudo_postgresql { } {
 
 ## ns_getform made safe
 
-rename ns_getform ns_getform_unsafe
+#rename ns_getform ns_getform_unsafe
 
 
 #
@@ -1157,7 +1182,7 @@ rename ns_getform ns_getform_unsafe
 #    into temp files if necessary.
 #
 
-proc ns_getform {{charset ""}}  {
+proc ns_getform_safe {{charset ""}}  {
     global _ns_form _ns_formfiles
 
     #

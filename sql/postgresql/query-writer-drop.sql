@@ -2,8 +2,9 @@
 
 -- Drop Query Writer Data Model
 --
--- @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+-- @author Tom Jackson (tom@junom.com)
 -- @creation-date 17 March 2002
+-- @cvs-id $Id: query-writer-drop.sql,v 1.1 2002/03/18 03:15:30 nsadmin Exp $
 --
 
 drop table qw_fn_attrs;

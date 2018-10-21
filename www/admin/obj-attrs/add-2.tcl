@@ -1,8 +1,9 @@
 ad_page_contract {
 
     Query Writer Add Object Attribute Page 2
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson <tom@junom.com>
     @creation-date 21 February 2002
+    @cvs-id $Id: add-2.tcl,v 1.3 2003/12/18 17:31:19 tom Exp $
 } {
 
     object_id:trim,notnull
@@ -18,7 +19,7 @@ ad_page_contract {
     {description:trim ""}
     {help_text:trim ""}
 
-}
+} 
 
 
 set sql "
@@ -38,7 +39,7 @@ insert into
  length,
  datatype
  )
-values
+values 
  (
  :attr_id,
  :object_id,

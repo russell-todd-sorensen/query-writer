@@ -1,8 +1,9 @@
 ad_page_contract {
 
     Query Writer Add Object Page 2
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson <tom@junom.com>
     @creation-date 21 February 2002
+    @cvs-id $Id: add-2.tcl,v 1.1 2002/02/22 09:26:53 nsadmin Exp $
 } {
     object:trim,notnull
     object_id:trim,notnull
@@ -17,12 +18,12 @@ ad_page_contract {
     {del_fn:trim ""}
     {rst_fn:trim ""}
     {perm_p:trim "1"}
-}
+} 
 
 
 set sql "
 insert into
- qw_objects
+ qw_objects 
 (
  object_id,
  object,
@@ -38,9 +39,9 @@ insert into
  rst_fn,
  perm_p
 )
-values
-(
- :object_id,
+values 
+( 
+ :object_id, 
  :object,
  :obj_table,
  :key,
@@ -59,3 +60,5 @@ values
 db_dml "insert_object_dml" $sql
 
 ad_returnredirect add
+
+

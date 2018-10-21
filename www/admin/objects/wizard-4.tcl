@@ -1,8 +1,9 @@
 ad_page_contract {
 
     Query Writer Wizard Step 4: Map Group Permissions
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson <tom@junom.com>
     @creation-date 21 February 2002
+    @cvs-id $Id: wizard-4.tcl,v 1.2 2003/12/18 17:31:31 tom Exp $
 } {
     object_id:notnull
     group:array,notnull
@@ -12,12 +13,12 @@ ad_page_contract {
 }
 
 set group_list [array names group]
-set groups [list]
+set groups [list] 
 
 db_foreach group_query "
 select
  *
-from
+from 
  qw_groups
 where
  group_id in ([join $group_list ,])" {
@@ -90,15 +91,15 @@ db_multirow -extend {
     if {[lsearch "$primary_keys" "$attr"] > -1 } {
 	ns_log Notice "Ops on primary key $attr"
 	set ops "new;del"
-
+	
     } elseif {[lsearch $acs_objects_attrs $attr] == -1} {
-
+	
 	set ops "new;set"
     }
-
+    
     # admin = default for object
     set admin_ops $ops
-
+    
     # attrs in acs_objects table, usually
     switch -exact -- [string tolower "$attr"] {
 	"object_type" {
@@ -127,3 +128,4 @@ set title "Object Wizard Step 4: Map Group Permissions for $object"
 set context [list "$title"]
 
 set return_url [ad_quotehtml "/qw/admin/objects/wizard-5?object_id=$object_id"]
+

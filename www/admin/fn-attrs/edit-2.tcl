@@ -1,8 +1,9 @@
 ad_page_contract {
 
     Query Writer Add Function Attribute
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson <tom@junom.com>
     @creation-date 22 February 2002
+    @cvs-id $Id: edit-2.tcl,v 1.1 2002/02/23 12:14:45 nsadmin Exp $
 } {
     fn_id:trim,notnull
     attr:trim,notnull
@@ -28,4 +29,5 @@ and
 
 db_dml "update_fn_attr_dml" $sql
 
-ad_returnredirect $return_url
+#ad_returnredirect $return_url
+ns_returnredirect $return_url

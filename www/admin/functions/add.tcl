@@ -1,8 +1,9 @@
 ad_page_contract {
 
     Query Writer Add Object Function
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson <tom@junom.com>
     @creation-date 22 February 2002
+    @cvs-id $Id: add.tcl,v 1.5 2003/12/18 17:30:37 tom Exp $
 } {
     object_id:trim,notnull
 } -properties {
@@ -21,7 +22,7 @@ where
 
     ad_return_complaint 1 "Object $object_id not found"
 
-}
+} 
 
 db_multirow types qw_fn_type_qry "
 select
@@ -37,7 +38,7 @@ db_multirow functions qw_obj_functions_qry "
 select
  qwf.*,
  ft.name as type_name,
- ft.description as type_description
+ ft.description as type_description 
 from
  qw_fns qwf,
  qw_fn_types ft

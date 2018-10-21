@@ -1,8 +1,11 @@
 ad_page_contract {
 
     Query Writer Admin Dump All Data
-    @author Russell Sorensen (russell.todd.sorensen@gmail.com)
+    @author Tom Jackson <tom@junom.com>
     @creation-date 27 February 2002
+    @revision-author Russell Sorensen <russ@semitasker.com>
+    @last-revised 21 October 2017
+    @file dump-all.tcl
 } {
     {prefix:trim ""}
 } -properties {
@@ -61,7 +64,7 @@ where
  group_id = :group_id"
 
 		append data "catch {db_dml insert_group \"insert into qw_groups (group_id, name) values (
-'$group_id','[DoubleApos $name]')\" } \n"
+$group_id,'[DoubleApos $name]')\" } \n"
 
 
  }
@@ -88,13 +91,15 @@ from
  qw_attrs
 where
  object_id = :object_id" {
-
-     append data "db_dml insert_object_attr \"insert into qw_attrs (attr_id,object_id,attr,
+     if {"$length" eq "" || "$length" eq "null"} {
+        set length 0
+     }
+     append data "db_dml insert_object_attr \"insert into qw_attrs (attr_id,object_id,attr,attr_order,
 description,default_value,help_text,filters,values,length,datatype) values (
-'$attr_id','$object_id','$attr',
+'$attr_id','$object_id','$attr',$attr_order,
 '[DoubleApos $description]','[DoubleApos $default_value]',
 '[DoubleApos $help_text]','[DoubleApos $filters]',
-'[DoubleApos $values]','$length','$datatype')\"\n"
+'[DoubleApos $values]',$length,'$datatype')\"\n"
 
 
 
@@ -134,7 +139,7 @@ where
 
        append data "db_dml insert_fn_attr \"insert into qw_fn_attrs (attr,fn_id,
 default_value, attr_order) values ('$attr','\$fn_id',
-'[DoubleApos $default_value]','$attr_order')\"\n"
+'[DoubleApos $default_value]',$attr_order)\"\n"
 
 
         }
@@ -150,7 +155,7 @@ where
 object_id = :object_id" {
 
     append data "db_dml  insert_qroup_attr_mapping \"insert into qw_group_attr_map
-(group_id,object_id,attr_id,values,ops) values ('$group_id','$object_id','$attr_id',
+(group_id,object_id,attr_id,values,ops) values ($group_id,'$object_id','$attr_id',
 '[DoubleApos $values]','$ops')\"\n"
 
     }
